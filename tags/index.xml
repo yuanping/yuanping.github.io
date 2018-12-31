@@ -21,6 +21,33 @@
     </item>
     
     <item>
+      <title>JWT</title>
+      <link>https://yuanping.github.io/tags/jwt/</link>
+      <pubDate>Sun, 16 Dec 2018 16:03:48 +0800</pubDate>
+      
+      <guid>https://yuanping.github.io/tags/jwt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rails</title>
+      <link>https://yuanping.github.io/tags/rails/</link>
+      <pubDate>Mon, 11 Jul 2011 16:03:48 +0800</pubDate>
+      
+      <guid>https://yuanping.github.io/tags/rails/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ruby</title>
+      <link>https://yuanping.github.io/tags/ruby/</link>
+      <pubDate>Mon, 11 Jul 2011 16:03:48 +0800</pubDate>
+      
+      <guid>https://yuanping.github.io/tags/ruby/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>互联网</title>
       <link>https://yuanping.github.io/tags/%E4%BA%92%E8%81%94%E7%BD%91/</link>
       <pubDate>Mon, 05 Sep 2011 16:03:48 +0800</pubDate>
@@ -68,9 +95,18 @@
     <item>
       <title>技术分享</title>
       <link>https://yuanping.github.io/tags/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/</link>
-      <pubDate>Mon, 11 Jul 2011 16:03:48 +0800</pubDate>
+      <pubDate>Sun, 16 Dec 2018 16:03:48 +0800</pubDate>
       
       <guid>https://yuanping.github.io/tags/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>敏捷开发</title>
+      <link>https://yuanping.github.io/tags/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Mon, 11 Jul 2011 16:03:48 +0800</pubDate>
+      
+      <guid>https://yuanping.github.io/tags/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/</guid>
       <description></description>
     </item>
     

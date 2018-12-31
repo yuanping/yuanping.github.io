@@ -6,10 +6,37 @@
     <description>Recent content in Posts on 袁平的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 05 Sep 2011 16:03:48 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 16 Dec 2018 16:03:48 +0800</lastBuildDate>
     
 	<atom:link href="https://yuanping.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>JWT Logout</title>
+      <link>https://yuanping.github.io/2018/12/jwt-logout/</link>
+      <pubDate>Sun, 16 Dec 2018 16:03:48 +0800</pubDate>
+      
+      <guid>https://yuanping.github.io/2018/12/jwt-logout/</guid>
+      <description>我们在之前的文章中简单介绍了JWT，与实现及原理，知道了JSON Web Token（JWT）是一种无状态处理用户身份验证的方式。JWT不会把认证的</description>
+    </item>
+    
+    <item>
+      <title>JWT的数据结构</title>
+      <link>https://yuanping.github.io/2018/11/jwt-structure/</link>
+      <pubDate>Sun, 18 Nov 2018 16:03:48 +0800</pubDate>
+      
+      <guid>https://yuanping.github.io/2018/11/jwt-structure/</guid>
+      <description>JWT 的原理 服务器认证以后，生成一个 JSON 对象，发回给用户，就像下面这样。 1 2 3 4 { &amp;#34;姓名&amp;#34;: &amp;#34;张三&amp;#34;, &amp;#34;角</description>
+    </item>
+    
+    <item>
+      <title>JWT简介</title>
+      <link>https://yuanping.github.io/2018/10/jwt-introduction/</link>
+      <pubDate>Wed, 24 Oct 2018 16:03:48 +0800</pubDate>
+      
+      <guid>https://yuanping.github.io/2018/10/jwt-introduction/</guid>
+      <description>JWT是什么 JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. JWT是JSON Web Token的缩写，从官方文档直译：一个安全的传输信息的开放标准</description>
+    </item>
     
     <item>
       <title>互联网产品免费模式的分析</title>
@@ -59,7 +86,9 @@
       <pubDate>Thu, 21 Jul 2011 16:03:48 +0800</pubDate>
       
       <guid>https://yuanping.github.io/2011/07/simple-and-functional/</guid>
-      <description>&lt;p&gt;很多设计师最大困惑在于简单易用与功能强大之间的权衡与选择，怎样才能设计出来的产品既简单易用又不失太多功能呢？&lt;/p&gt;
+      <description>&lt;h2 id=&#34;不要盲目增加功能&#34;&gt;不要盲目增加功能&lt;/h2&gt;
+
+&lt;p&gt;很多设计师最大困惑在于简单易用与功能强大之间的权衡与选择，怎样才能设计出来的产品既简单易用又不失太多功能呢？&lt;/p&gt;
 
 &lt;p&gt;其实对于一个即使有五年工作经验的软件工程师来说，也是比较难权衡的，可能刚开始设计出来的产品是简单易用的，但随着时间的推移，用户不断的在提需求，工程师也不断的在加功能，最后导致这个软件变的非常复杂难用，工程师在这个过程中可能很难注意到这个问题，但发现这个问题时，就比较晚了。&lt;/p&gt;</description>
     </item>

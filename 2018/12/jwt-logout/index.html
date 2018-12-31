@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>JWT Logout - 袁平的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="袁平" /><meta name="description" content="我们在之前的文章中简单介绍了JWT，与实现及原理，知道了JSON Web Token（JWT）是一种无状态处理用户身份验证的方式。JWT不会把认证的" /><meta name="keywords" content="袁平, Rails" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://yuanping.github.io/2018/12/jwt-logout/" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://yuanping.github.io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yuanping.github.io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yuanping.github.io/favicon-16x16.png">
+<link rel="manifest" href="https://yuanping.github.io/manifest.json">
+<link rel="mask-icon" href="https://yuanping.github.io/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="https://yuanping.github.io/dist/even.93844dae.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="JWT Logout" />
+<meta property="og:description" content="我们在之前的文章中简单介绍了JWT，与实现及原理，知道了JSON Web Token（JWT）是一种无状态处理用户身份验证的方式。JWT不会把认证的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yuanping.github.io/2018/12/jwt-logout/" /><meta property="article:published_time" content="2018-12-16T16:03:48&#43;08:00"/>
+<meta property="article:modified_time" content="2018-12-16T16:03:48&#43;08:00"/>
+
+<meta itemprop="name" content="JWT Logout">
+<meta itemprop="description" content="我们在之前的文章中简单介绍了JWT，与实现及原理，知道了JSON Web Token（JWT）是一种无状态处理用户身份验证的方式。JWT不会把认证的">
+
+
+<meta itemprop="datePublished" content="2018-12-16T16:03:48&#43;08:00" />
+<meta itemprop="dateModified" content="2018-12-16T16:03:48&#43;08:00" />
+<meta itemprop="wordCount" content="1344">
+
+
+
+<meta itemprop="keywords" content="JWT,技术分享," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JWT Logout"/>
+<meta name="twitter:description" content="我们在之前的文章中简单介绍了JWT，与实现及原理，知道了JSON Web Token（JWT）是一种无状态处理用户身份验证的方式。JWT不会把认证的"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="https://yuanping.github.io/" class="logo">袁平的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="https://yuanping.github.io/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="https://yuanping.github.io/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="https://yuanping.github.io/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="https://yuanping.github.io/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="https://yuanping.github.io/" class="logo">袁平的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">JWT Logout</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-12-16 </span>
+        <div class="post-category">
+            <a href="https://yuanping.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"> 技术分享 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#关于注销">关于注销</a></li>
+<li><a href="#关于过期">关于过期</a></li>
+<li><a href="#黑名单方案">黑名单方案</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>我们在之前的文章中简单介绍了JWT，与实现及原理，知道了JSON Web Token（JWT）是一种无状态处理用户身份验证的方式。JWT不会把认证的状态存储到数据库，因此认证用户时也就不需要执行数据库查询。而是基于用户的信息生成Token，客户端在请求中带着Token，这样服务端就可以标识出用户了。</p>
+
+<p>所以一旦Token生成，就一直可以被使用，除非它过期。JWT在生成时有选项，可以设置Token的有效期。</p>
+
+<p>但是如果你想让某个用户的Token失效怎么办呢？比如当用户修改了密码，需要把用户之前登录的所有设备退出已登录状态怎么办？</p>
+
+<h1 id="关于注销">关于注销</h1>
+
+<p>通常客户端会把Token存放在某处，之后再请求中带着去访问需要认证的API。当用户需要退出登录时，一般客户端会把本地存储的Token删除（比如，浏览器存放在local storage）。这样当客户端不带着Token请求时，就会从服务端收到403未认证的响应。</p>
+
+<p>使用过Gmail的用户都知道，有个功能可以管理所有认证过的客户端，可以在一个列表看到之前授权使用的客户端，你可以有选择的把一些不再使用的客户端删除，这样那个客户端就不再可以收发邮件了。</p>
+
+<p>其实就是在服务端把某个客户端的Token删除，这样那个客户端就没办法在访问了。那如果使用JWT怎么做呢？服务端并没有存JWT，所以也不可能把某个JWT失效。</p>
+
+<h1 id="关于过期">关于过期</h1>
+
+<p>JWT是可以指定过期时间的，但是一旦生成，就没有办法修改，使它过期。</p>
+
+<p>你可以在签发JWT时通过<code>exp</code>字段指定Token过期时间。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">{
+  &#34;sub&#34;: &#34;1234567890&#34;,
+  &#34;name&#34;: &#34;Yuan Ping&#34;,
+  &#34;iat&#34;: 1516234022,
+  &#34;exp&#34;: 1516239022
+}</pre></td></tr></table>
+</div>
+</div>
+<p>提示：一般每种编程语言都会有JWT的包可用，<code>iat</code>与<code>exp</code>一般不需要自己放在payload中。</p>
+
+<p>如果你不想让JWT永久有效，那么就需要设置一个合理的失效时间。一般根据你的应用来决定具体的时间。</p>
+
+<p>比如你想签发一个一天有效的Token，用NodeJS代码举例，如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">const jwt = require(&#39;jsonwebtoken&#39;);
+const payload = {
+  &#34;sub&#34;: &#34;1234567890&#34;,
+  &#34;name&#34;: &#34;Yuan Ping&#34;,
+  &#34;iat&#34;: 1516234022
+}
+const token = jwt.sign(payload, &#39;your-secret&#39;, {expiresIn: &#39;1d&#39;})</pre></td></tr></table>
+</div>
+</div>
+<p>当Token失效后，客户端再次请求受保护的API时，会得到一个未认证的服务端响应。通常客户端的处理方案是把这个过期的Token删除，重定向到登录页面让用户重新登录。所以上面的示例代码，当1天结束后，客户端会自动让用户退出登录状态。</p>
+
+<h1 id="黑名单方案">黑名单方案</h1>
+
+<p>前面我们已经说了，一旦Token创建就不能手动修改让它失效。因此，你就不能像控制session一样，在服务端让某个Token失效。</p>
+
+<p>你可能想到可以修改JWT的secret，但是这样会导致所有的用户的Token都失效，并不是某一个Token失效。</p>
+
+<p>有一种实现方案是使用黑名单，把你想立即失效的Token放到这个黑名单中，每次请求时查询这个黑名单，如果当前访问的Token在里面，就返回403未认证的响应。你可能会说，这样黑名单不是会越来越大吗？你可以使用TTL选项进行优化。TTL是指一个记录存亡的时间，比如TTL设置2天，那么2天后这条记录就会自动删除。如果你选择要失效的JWT有效期还有2天，那么加入黑名单时，TTL就设置为2天。Redis是一个很好的选择，这样可以在内存中取到黑名单进行判断。聪明的你一定把这个逻辑放在中间件(middleware)中，而不是在写在每个接口里，对吧？这样只有当Token不在黑名单中，再去走中间件JWT的验证。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">袁平</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">2018-12-16</span>
+  </p>
+  
+  
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://yuanping.github.io/tags/jwt/">JWT</a>
+          <a href="https://yuanping.github.io/tags/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="https://yuanping.github.io/2018/11/jwt-structure/">
+            <span class="next-text nav-default">JWT的数据结构</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="yp.xjgz@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/1819766/yuan-ping" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/yuanping" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/1879650055/profile" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="https://yuanping.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">袁平</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://yuanping.github.io/dist/even.ece58db6.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

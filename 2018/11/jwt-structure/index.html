@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>JWT的数据结构 - 袁平的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="袁平" /><meta name="description" content="JWT 的原理 服务器认证以后，生成一个 JSON 对象，发回给用户，就像下面这样。 1 2 3 4 { &amp;#34;姓名&amp;#34;: &amp;#34;张三&amp;#34;, &amp;#34;角" /><meta name="keywords" content="袁平, Rails" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://yuanping.github.io/2018/11/jwt-structure/" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://yuanping.github.io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yuanping.github.io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yuanping.github.io/favicon-16x16.png">
+<link rel="manifest" href="https://yuanping.github.io/manifest.json">
+<link rel="mask-icon" href="https://yuanping.github.io/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="https://yuanping.github.io/dist/even.93844dae.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="JWT的数据结构" />
+<meta property="og:description" content="JWT 的原理 服务器认证以后，生成一个 JSON 对象，发回给用户，就像下面这样。 1 2 3 4 { &#34;姓名&#34;: &#34;张三&#34;, &#34;角" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yuanping.github.io/2018/11/jwt-structure/" /><meta property="article:published_time" content="2018-11-18T16:03:48&#43;08:00"/>
+<meta property="article:modified_time" content="2018-11-18T16:03:48&#43;08:00"/>
+
+<meta itemprop="name" content="JWT的数据结构">
+<meta itemprop="description" content="JWT 的原理 服务器认证以后，生成一个 JSON 对象，发回给用户，就像下面这样。 1 2 3 4 { &#34;姓名&#34;: &#34;张三&#34;, &#34;角">
+
+
+<meta itemprop="datePublished" content="2018-11-18T16:03:48&#43;08:00" />
+<meta itemprop="dateModified" content="2018-11-18T16:03:48&#43;08:00" />
+<meta itemprop="wordCount" content="1294">
+
+
+
+<meta itemprop="keywords" content="JWT,技术分享," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JWT的数据结构"/>
+<meta name="twitter:description" content="JWT 的原理 服务器认证以后，生成一个 JSON 对象，发回给用户，就像下面这样。 1 2 3 4 { &#34;姓名&#34;: &#34;张三&#34;, &#34;角"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="https://yuanping.github.io/" class="logo">袁平的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="https://yuanping.github.io/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="https://yuanping.github.io/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="https://yuanping.github.io/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="https://yuanping.github.io/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="https://yuanping.github.io/" class="logo">袁平的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">JWT的数据结构</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-11-18 </span>
+        <div class="post-category">
+            <a href="https://yuanping.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"> 技术分享 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#jwt-的原理">JWT 的原理</a></li>
+<li><a href="#jwt-的数据结构">JWT 的数据结构</a>
+<ul>
+<li><a href="#header">Header</a></li>
+<li><a href="#payload">Payload</a></li>
+<li><a href="#signature">Signature</a></li>
+<li><a href="#base64url">Base64URL</a></li>
+<li><a href="#完整的jwt">完整的JWT</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h1 id="jwt-的原理">JWT 的原理</h1>
+
+<p>服务器认证以后，生成一个 JSON 对象，发回给用户，就像下面这样。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">{
+  &#34;姓名&#34;: &#34;张三&#34;,
+  &#34;角色&#34;: &#34;管理员&#34;
+}</pre></td></tr></table>
+</div>
+</div>
+<p>以后，用户与服务端通信的时候，都要发回这个 JSON 对象。服务器完全只靠这个对象认定用户身份。为了防止用户篡改数据，服务器在生成这个对象的时候，会加上签名（详见后文）。</p>
+
+<p>服务器就不保存任何 session 数据了，也就是说，服务器变成无状态了，从而比较容易实现扩展。</p>
+
+<h1 id="jwt-的数据结构">JWT 的数据结构</h1>
+
+<p>实际的 JWT 大概就像下面这样。</p>
+
+<p><img src="https://www.wangbase.com/blogimg/asset/201807/bg2018072304.jpg" alt="" /></p>
+
+<p>它是一个很长的字符串，中间用点（<code>.</code>）分隔成三个部分。注意，JWT 内部是没有换行的，这里只是为了便于展示，将它写成了几行。</p>
+
+<p>JWT 的三个部分依次如下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">Header（头部）Payload（负载）Signature（签名）</pre></td></tr></table>
+</div>
+</div>
+<p>写成一行，就是下面的样子。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">Header.Payload.Signature</pre></td></tr></table>
+</div>
+</div>
+<p><img src="https://www.wangbase.com/blogimg/asset/201807/bg2018072303.jpg" alt="" /></p>
+
+<p>下面依次介绍这三个部分。</p>
+
+<h2 id="header">Header</h2>
+
+<p>Header 部分是一个 JSON 对象，描述 JWT 的元数据，通常是下面的样子。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">{
+  &#34;alg&#34;: &#34;HS256&#34;,
+  &#34;typ&#34;: &#34;JWT&#34;
+}</pre></td></tr></table>
+</div>
+</div>
+<p>上面代码中，<code>alg</code>属性表示签名的算法（algorithm），默认是 HMAC SHA256（写成 HS256）；<code>typ</code>属性表示这个令牌（token）的类型（type），JWT 令牌统一写为<code>JWT</code>。</p>
+
+<p>最后，将上面的 JSON 对象使用 Base64URL 算法（详见后文）转成字符串。</p>
+
+<h2 id="payload">Payload</h2>
+
+<p>Payload 部分也是一个 JSON 对象，用来存放实际需要传递的数据。JWT 规定了7个官方字段，供选用。</p>
+
+<ul>
+<li>iss (issuer)：签发者</li>
+<li>exp (expiration time)：过期时间</li>
+<li>sub (subject)：主题</li>
+<li>aud (audience)：受众，接收jwt的一方</li>
+<li>nbf (Not Before)：生效时间，定义在什么时间之前，该jwt都是不可用的。</li>
+<li>iat (Issued At)：签发时间</li>
+<li>jti (JWT ID)：编号</li>
+</ul>
+
+<p>除了官方字段，你还可以在这个部分定义私有字段，下面就是一个例子。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">{
+  &#34;sub&#34;: &#34;1234567890&#34;,
+  &#34;name&#34;: &#34;John Doe&#34;,
+  &#34;admin&#34;: true
+}</pre></td></tr></table>
+</div>
+</div>
+<p>注意，JWT 默认是不加密的，任何人都可以读到，所以不要把秘密信息放在这个部分。</p>
+
+<p>这个 JSON 对象也要使用 Base64URL 算法转成字符串。</p>
+
+<h2 id="signature">Signature</h2>
+
+<p>Signature 部分是对前两部分的签名，防止数据篡改。</p>
+
+<p>首先，需要指定一个密钥（secret）。这个密钥只有服务器才知道，不能泄露给用户。然后，使用 Header 里面指定的签名算法（默认是 HMAC SHA256），按照下面的公式产生签名。</p>
+
+<blockquote>
+<p>HMACSHA256(base64UrlEncode(header) + &ldquo;.&rdquo; +
+  base64UrlEncode(payload),
+  secret)</p>
+</blockquote>
+
+<p>算出签名以后，把 Header、Payload、Signature 三个部分拼成一个字符串，每个部分之间用&rdquo;点&rdquo;（<code>.</code>）分隔，就可以返回给用户。</p>
+
+<h2 id="base64url">Base64URL</h2>
+
+<p>前面提到，Header 和 Payload 串型化的算法是 Base64URL。这个算法跟 Base64 算法基本类似，但有一些小的不同。</p>
+
+<p>JWT 作为一个令牌（token），有些场合可能会放到 URL（比如 api.example.com/?token=xxx）。Base64 有三个字符<code>+</code>、<code>/</code>和<code>=</code>，在 URL 里面有特殊含义，所以要被替换掉：<code>=</code>被省略、<code>+</code>替换成<code>-</code>，<code>/</code>替换成<code>_</code> 。这就是 Base64URL 算法。</p>
+
+<h2 id="完整的jwt">完整的JWT</h2>
+
+<p>JWT格式的输出是以<code>.</code>分隔的三段Base64编码，与SAML等基于XML的标准相比，JWT在HTTP和HTML环境中更容易传递。</p>
+
+<p>下列的JWT展示了一个完整的JWT格式，它拼接了之前的Header， Payload以及秘钥签名：</p>
+
+<p><img src="https://magnet-file.qn.cichang.net/yuanping/blog/encoded-jwt3.png" alt="encoded-jwt" /></p>
+
+<p>如果你想把刚才我们说的概念做一个实践，你可以使用官方网站提供的小工具去调试</p>
+
+<p><img src="https://magnet-file.qn.cichang.net/yuanping/blog/legacy-app-auth-5.png" alt="debug-jwt" /></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">袁平</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">2018-11-18</span>
+  </p>
+  
+  
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://yuanping.github.io/tags/jwt/">JWT</a>
+          <a href="https://yuanping.github.io/tags/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="https://yuanping.github.io/2018/12/jwt-logout/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">JWT Logout</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="https://yuanping.github.io/2018/10/jwt-introduction/">
+            <span class="next-text nav-default">JWT简介</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="yp.xjgz@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/1819766/yuan-ping" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/yuanping" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/1879650055/profile" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="https://yuanping.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">袁平</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://yuanping.github.io/dist/even.ece58db6.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
