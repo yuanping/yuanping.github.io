@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://yuanping.github.io/sitemap.xml

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>简单与功能的权衡 - 袁平的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Yuan Ping" /><meta name="description" content="很多设计师最大困惑在于简单易用与功能强大之间的权衡与选择，怎样才能设计出来的产品既简单易用又不失太多功能呢？
+其实对于一个即使有五年工作经验的软件工程师来说，也是比较难权衡的，可能刚开始设计出来的产品是简单易用的，但随着时间的推移，用户不断的在提需求，工程师也不断的在加功能，最后导致这个软件变的非常复杂难用，工程师在这个过程中可能很难注意到这个问题，但发现这个问题时，就比较晚了。
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://yuanping.github.io/2011/07/simple-and-functional/" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://yuanping.github.io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yuanping.github.io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yuanping.github.io/favicon-16x16.png">
+<link rel="manifest" href="https://yuanping.github.io/manifest.json">
+<link rel="mask-icon" href="https://yuanping.github.io/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="https://yuanping.github.io/dist/even.93844dae.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="简单与功能的权衡" />
+<meta property="og:description" content="很多设计师最大困惑在于简单易用与功能强大之间的权衡与选择，怎样才能设计出来的产品既简单易用又不失太多功能呢？
+
+其实对于一个即使有五年工作经验的软件工程师来说，也是比较难权衡的，可能刚开始设计出来的产品是简单易用的，但随着时间的推移，用户不断的在提需求，工程师也不断的在加功能，最后导致这个软件变的非常复杂难用，工程师在这个过程中可能很难注意到这个问题，但发现这个问题时，就比较晚了。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yuanping.github.io/2011/07/simple-and-functional/" /><meta property="article:published_time" content="2011-07-21T16:03:48&#43;08:00"/>
+<meta property="article:modified_time" content="2011-07-21T16:03:48&#43;08:00"/>
+
+<meta itemprop="name" content="简单与功能的权衡">
+<meta itemprop="description" content="很多设计师最大困惑在于简单易用与功能强大之间的权衡与选择，怎样才能设计出来的产品既简单易用又不失太多功能呢？
+
+其实对于一个即使有五年工作经验的软件工程师来说，也是比较难权衡的，可能刚开始设计出来的产品是简单易用的，但随着时间的推移，用户不断的在提需求，工程师也不断的在加功能，最后导致这个软件变的非常复杂难用，工程师在这个过程中可能很难注意到这个问题，但发现这个问题时，就比较晚了。">
+
+
+<meta itemprop="datePublished" content="2011-07-21T16:03:48&#43;08:00" />
+<meta itemprop="dateModified" content="2011-07-21T16:03:48&#43;08:00" />
+<meta itemprop="wordCount" content="764">
+
+
+
+<meta itemprop="keywords" content="产品设计," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="简单与功能的权衡"/>
+<meta name="twitter:description" content="很多设计师最大困惑在于简单易用与功能强大之间的权衡与选择，怎样才能设计出来的产品既简单易用又不失太多功能呢？
+
+其实对于一个即使有五年工作经验的软件工程师来说，也是比较难权衡的，可能刚开始设计出来的产品是简单易用的，但随着时间的推移，用户不断的在提需求，工程师也不断的在加功能，最后导致这个软件变的非常复杂难用，工程师在这个过程中可能很难注意到这个问题，但发现这个问题时，就比较晚了。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="https://yuanping.github.io/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="https://yuanping.github.io/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="https://yuanping.github.io/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="https://yuanping.github.io/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="https://yuanping.github.io/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="https://yuanping.github.io/" class="logo">Even</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">简单与功能的权衡</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2011-07-21 </span>
+        <div class="post-category">
+            <a href="https://yuanping.github.io/categories/%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1/"> 产品设计 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    
+  </div>
+</div>
+    <div class="post-content">
+      <p>很多设计师最大困惑在于简单易用与功能强大之间的权衡与选择，怎样才能设计出来的产品既简单易用又不失太多功能呢？</p>
+
+<p>其实对于一个即使有五年工作经验的软件工程师来说，也是比较难权衡的，可能刚开始设计出来的产品是简单易用的，但随着时间的推移，用户不断的在提需求，工程师也不断的在加功能，最后导致这个软件变的非常复杂难用，工程师在这个过程中可能很难注意到这个问题，但发现这个问题时，就比较晚了。</p>
+
+<p>简单与功能的权衡并没有一个明确的规范好参考，这个只能是一个人的工作经验与思考。</p>
+
+<p>当用户提出一个新的需求时，首先是思考用户为什么会提这个需求，因为这个需求可能是个“伪需求”，客户自己对软件的设计，了解了客户真实的需求后，再分析是增加一个功能还是现在系统有更好的解决方案。多些思考，会少很多麻烦。</p>
+
+<p>WorkXP首席设计师汪练说“我们不会一有需求就加功能，我们会有一个判断，这个功能是不是必要。” 汪练表示，有些用户提出的需求其实是“伪需求”，可以通过其他的更好的方式来解决的。比如之前有一个客户提出WorkXP要增加一个文件共享的功能，当我们与客户深入沟通后，其实是想把公司的一些文件放在一个地方，方便员工查看，但还要权限机制。我们给用户出了个主意，他非常满意：建一个联系人名字就是自己公司，然后文件都可以上传到这个联系人下，并且可以设置哪些人可以看到。这样很容易的解决了用户的问题，用户还认为系统非常灵活。</p>
+
+<p>设计师只有比用户自己更了解用户需要什么，才能做出一个正确的权衡。设计师要非常了解产品，了解需求，才能做出简单易用的产品。</p>
+
+<p>产品的定位一定要清晰，不用满足所有用户。软件不需要去适应所有的情况，有时候，它不能干某些事情才恰恰凸显它的价值。</p>
+
+<p>总结一下</p>
+
+<ol>
+<li>不要盲目增加功能，多一点思考<br /></li>
+<li>了解用户真实需求，是否有更简单的方式来解决<br /></li>
+<li>要比用户更了解用户需求<br /></li>
+<li>产品要有清晰的定位<br /></li>
+</ol>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Yuan Ping</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">2011-07-21</span>
+  </p>
+  
+  
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://yuanping.github.io/tags/%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1/">产品设计</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="https://yuanping.github.io/2011/07/how-self-conscious-use-crm/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">如何让员工自觉用上CRM系统？</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="https://yuanping.github.io/2011/07/share-commercial-activities-experience/">
+            <span class="next-text nav-default">分享昨晚参加创投活动的收获</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://yuanping.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Yuan Ping</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://yuanping.github.io/dist/even.ece58db6.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
