@@ -3,6 +3,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yuanping.github.io/about/</loc>
+    <lastmod>2017-08-28T21:41:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://yuanping.github.io/2018/12/jwt-logout/</loc>
     <lastmod>2018-12-16T16:03:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -233,7 +240,7 @@
   
   <url>
     <loc>https://yuanping.github.io/</loc>
-    <lastmod>2018-12-16T16:03:48+08:00</lastmod>
+    <lastmod>2017-08-28T21:41:52+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
