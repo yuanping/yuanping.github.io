@@ -6,10 +6,19 @@
     <description>Recent content in Tags on 袁平的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 22 Jul 2011 16:03:48 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 05 Jan 2019 16:03:48 +0800</lastBuildDate>
     
 	<atom:link href="https://yuanping.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Bash</title>
+      <link>https://yuanping.github.io/tags/bash/</link>
+      <pubDate>Sat, 05 Jan 2019 16:03:48 +0800</pubDate>
+      
+      <guid>https://yuanping.github.io/tags/bash/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>CRM</title>
@@ -44,6 +53,15 @@
       <pubDate>Mon, 11 Jul 2011 16:03:48 +0800</pubDate>
       
       <guid>https://yuanping.github.io/tags/ruby/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shell</title>
+      <link>https://yuanping.github.io/tags/shell/</link>
+      <pubDate>Sat, 05 Jan 2019 16:03:48 +0800</pubDate>
+      
+      <guid>https://yuanping.github.io/tags/shell/</guid>
       <description></description>
     </item>
     
@@ -95,7 +113,7 @@
     <item>
       <title>技术分享</title>
       <link>https://yuanping.github.io/tags/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/</link>
-      <pubDate>Sun, 16 Dec 2018 16:03:48 +0800</pubDate>
+      <pubDate>Sat, 05 Jan 2019 16:03:48 +0800</pubDate>
       
       <guid>https://yuanping.github.io/tags/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/</guid>
       <description></description>

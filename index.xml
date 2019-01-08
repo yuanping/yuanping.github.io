@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Shell 脚本简介</title>
+      <link>https://yuanping.github.io/2019/01/shell-script-introduction/</link>
+      <pubDate>Sat, 05 Jan 2019 16:03:48 +0800</pubDate>
+      
+      <guid>https://yuanping.github.io/2019/01/shell-script-introduction/</guid>
+      <description>Shell脚本仅仅是你写在一个文件里的一组命令，可以一次一起执行。如果你以前了解过Dos的批处，其实差不多一个概念。也就是用各类命令预先放入</description>
+    </item>
+    
+    <item>
       <title>JWT Logout</title>
       <link>https://yuanping.github.io/2018/12/jwt-logout/</link>
       <pubDate>Sun, 16 Dec 2018 16:03:48 +0800</pubDate>
