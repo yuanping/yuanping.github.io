@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>关于用户体验经验分享 - 袁平的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="袁平" /><meta name="description" content="前两天我写的 关于产品设计的经验分享 ，所以接着讲上篇继续讲我的故事。 上次写了做为一个产品经理，一定要时刻提醒自己，产品的核心是什么，别失去了方" /><meta name="keywords" content="袁平, Rails" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://yuanping.github.io/2011/12/user-experence-share/" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://yuanping.github.io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yuanping.github.io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yuanping.github.io/favicon-16x16.png">
+<link rel="manifest" href="https://yuanping.github.io/manifest.json">
+<link rel="mask-icon" href="https://yuanping.github.io/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="https://yuanping.github.io/dist/even.93844dae.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="关于用户体验经验分享" />
+<meta property="og:description" content="前两天我写的 关于产品设计的经验分享 ，所以接着讲上篇继续讲我的故事。 上次写了做为一个产品经理，一定要时刻提醒自己，产品的核心是什么，别失去了方" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yuanping.github.io/2011/12/user-experence-share/" /><meta property="article:published_time" content="2011-12-10T16:03:48&#43;08:00"/>
+<meta property="article:modified_time" content="2011-12-10T16:03:48&#43;08:00"/>
+
+<meta itemprop="name" content="关于用户体验经验分享">
+<meta itemprop="description" content="前两天我写的 关于产品设计的经验分享 ，所以接着讲上篇继续讲我的故事。 上次写了做为一个产品经理，一定要时刻提醒自己，产品的核心是什么，别失去了方">
+
+
+<meta itemprop="datePublished" content="2011-12-10T16:03:48&#43;08:00" />
+<meta itemprop="dateModified" content="2011-12-10T16:03:48&#43;08:00" />
+<meta itemprop="wordCount" content="1371">
+
+
+
+<meta itemprop="keywords" content="互联网,产品设计," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="关于用户体验经验分享"/>
+<meta name="twitter:description" content="前两天我写的 关于产品设计的经验分享 ，所以接着讲上篇继续讲我的故事。 上次写了做为一个产品经理，一定要时刻提醒自己，产品的核心是什么，别失去了方"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="https://yuanping.github.io/" class="logo">袁平的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="https://yuanping.github.io/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="https://yuanping.github.io/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="https://yuanping.github.io/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="https://yuanping.github.io/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="https://yuanping.github.io/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="https://yuanping.github.io/" class="logo">袁平的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">关于用户体验经验分享</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2011-12-10 </span>
+        <div class="post-category">
+            <a href="https://yuanping.github.io/categories/%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1/"> 产品设计 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#自己必须是用户">自己必须是用户</a></li>
+<li><a href="#方便与安全">方便与安全</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>前两天我写的 关于产品设计的经验分享 ，所以接着讲上篇继续讲我的故事。</p>
+
+<p>上次写了做为一个产品经理，一定要时刻提醒自己，产品的核心是什么，别失去了方向。</p>
+
+<p>继续写我的故事，前面也说了，当我把记账功能与统计做好后，做了些乱七八糟的相关的东西，关没有把最核心东西做好，怎么做好呢？其实像我一样，很多没有经验的产品经理，这时会觉得功能做完了，可以做别的功能了，并没考虑用户体验。</p>
+
+<h1 id="自己必须是用户">自己必须是用户</h1>
+
+<p>怎样改善用户体验呢？最好的方式是自己就是用户，自己是这个产品最熟悉的用户。当这个产品是给别人做的，自己从没用过，这个产品会好用吗？你可能会说让客户用，然后让他们提意见，然后再修改不就行了吗？错了，客户会给你提意见，但有些意见不一定是真实的，你要去过滤，但如果你自己不是用户，很难判断哪些建议是合理的，哪些有更好的解决方案，哪些是没有必要的。</p>
+
+<p>我刚开始做记账的统计时，参考了国内几家和国外的几家，做了十种图表进行统计分析，真是全方位统计了，功能非常强大了，但是。。。。我想告诉你这是错误的。因为我自己就是用户，每天都会用，通过半年的使用，发现慢慢的，我不会看那么多方位的统计，正真关心的图表只有3个，剩下7个我基本从不去看它。这时你就可以优化了，把那3个放到最方便用户看到的地方，其它的放到别的菜单，或是都可以不要。这只有自己才能感受的到，如果你问用户，他们会说这个统计挺好的（一般都是新用户，心想多了比少了好）;真正能用半年，然后告诉你哪几个是他最关心的图表的用户太少了，可能还没用到半年就被功能复杂的界面搞晕而走了。</p>
+
+<p>WorkXP首席设计师汪练说“我们不会一有需求就加功能，我们会有一个判断，这个功能是不是必要，有些用户提出的需求其实是“伪需求”，可以通过其他的更好的方式来解决的。”</p>
+
+<p>有人问我“怎么区分是伪需求与真实需求呢？”答案也很简单，一是你非常理解产品的设计与架构;二是你必须是产品的用户。这样才能做一个非常合格的产品经理。</p>
+
+<p>只有当你自己是用户时，并是最熟悉这个产品的用户时，你才能给别人给出最佳实践，设计出产品的用户体验才是最好的。</p>
+
+<h1 id="方便与安全">方便与安全</h1>
+
+<p>在做网站时，用户给我反应最担心的是安全，有人提出登录加上验证码可以防止硬破解，更安全。但那会加上之后发现，非常麻烦，有时看错了或看不清，给登录带了很多不便。自己都用的不方便了，所以优化了，改为当用户输入密码3次错误时，再提示这个IP或MAC地址必须输入验证码，这样的解决方案是否好多了呢？</p>
+
+<p>最近在做一个SaaS CRM的产品，所以感受几个竞争对手的用户体验，管理123估计就没管过用户体验，估计做出来东西自己都没用过，产品出来3年了，每次登录还要输入验证码。。。还打的口号是最简单、易用。。。八百客的CRM出来9年了，登录除了用户名密码，还要输入公司名称！有必要吗？不知道这些设计产品的人考虑过用户吗？自己用吗？应该把用户体验放到第一位，通过技术简化用户操作，尽可能的减少不必要的操作，而不是为了你写程序简单，好实现所以要让用户多输入一些东西，多点几次鼠标。如果是做项目我可以理解，做产品这样，早晚会死路一条。</p>
+
+<p>不好意思，刚说到用户体验有点情绪，因为国内有些做企业产品的公司太差了。这次分享了点我对用户体验的一点经验，希望对大家有所帮助，第一次创业失败的原因不仅仅是这两次说的这些，后面还发生了很多当初没想到的事，有时间继续写。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">袁平</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">2011-12-10</span>
+  </p>
+  
+  
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://yuanping.github.io/tags/%E4%BA%92%E8%81%94%E7%BD%91/">互联网</a>
+          <a href="https://yuanping.github.io/tags/%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1/">产品设计</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="https://yuanping.github.io/2018/10/jwt-introduction/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">JWT简介</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="https://yuanping.github.io/2011/11/free-internet-product-model/">
+            <span class="next-text nav-default">关于产品设计经验分享</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="yp.xjgz@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/1819766/yuan-ping" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/yuanping" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/1879650055/profile" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="https://yuanping.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">袁平</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://yuanping.github.io/dist/even.ece58db6.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

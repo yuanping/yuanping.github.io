@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>关于产品设计经验分享 - 袁平的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="袁平" /><meta name="description" content="最近一直在分享现在创业过程中的一些心得与经验，有一个朋友看了我的文章，私信和我联系了，问我友财网是不是我做的，我非常好奇他怎么知道我以前做的" /><meta name="keywords" content="袁平, Rails" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://yuanping.github.io/2011/11/free-internet-product-model/" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://yuanping.github.io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yuanping.github.io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yuanping.github.io/favicon-16x16.png">
+<link rel="manifest" href="https://yuanping.github.io/manifest.json">
+<link rel="mask-icon" href="https://yuanping.github.io/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="https://yuanping.github.io/dist/even.93844dae.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="关于产品设计经验分享" />
+<meta property="og:description" content="最近一直在分享现在创业过程中的一些心得与经验，有一个朋友看了我的文章，私信和我联系了，问我友财网是不是我做的，我非常好奇他怎么知道我以前做的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yuanping.github.io/2011/11/free-internet-product-model/" /><meta property="article:published_time" content="2011-11-02T16:03:48&#43;08:00"/>
+<meta property="article:modified_time" content="2011-11-02T16:03:48&#43;08:00"/>
+
+<meta itemprop="name" content="关于产品设计经验分享">
+<meta itemprop="description" content="最近一直在分享现在创业过程中的一些心得与经验，有一个朋友看了我的文章，私信和我联系了，问我友财网是不是我做的，我非常好奇他怎么知道我以前做的">
+
+
+<meta itemprop="datePublished" content="2011-11-02T16:03:48&#43;08:00" />
+<meta itemprop="dateModified" content="2011-11-02T16:03:48&#43;08:00" />
+<meta itemprop="wordCount" content="1512">
+
+
+
+<meta itemprop="keywords" content="互联网,产品设计," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="关于产品设计经验分享"/>
+<meta name="twitter:description" content="最近一直在分享现在创业过程中的一些心得与经验，有一个朋友看了我的文章，私信和我联系了，问我友财网是不是我做的，我非常好奇他怎么知道我以前做的"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="https://yuanping.github.io/" class="logo">袁平的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="https://yuanping.github.io/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="https://yuanping.github.io/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="https://yuanping.github.io/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="https://yuanping.github.io/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="https://yuanping.github.io/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="https://yuanping.github.io/" class="logo">袁平的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">关于产品设计经验分享</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2011-11-02 </span>
+        <div class="post-category">
+            <a href="https://yuanping.github.io/categories/%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1/"> 产品设计 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#一个不错的开始">一个不错的开始</a></li>
+<li><a href="#开始迷失了">开始迷失了</a></li>
+<li><a href="#优先级">优先级</a></li>
+<li><a href="#用户最关心的">用户最关心的</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>最近一直在分享现在创业过程中的一些心得与经验，有一个朋友看了我的文章，私信和我联系了，问我友财网是不是我做的，我非常好奇他怎么知道我以前做的网站的？聊了之后，原来他以前就是友财网的老用户。他说自从网站停止服务后就一直在找一个比较合适的免费个人记账网站，但一直没有找到特别满意的，现在也想用业余时间，按着自己的想法做一个记账网站。这个小伙很有想法，因为自己就是用户，所以也最了解需求，做出来自己也会一直用，相信不久的将来一定又会出现一个非常好的产品。聊了些我那会做失败的一些原因，我觉得总结一下，分享给大家或多或少会有些帮助~</p>
+
+<p>那会做网站时，并不了解互联网，不了解运营，之前也是做项目，也没有做产品的经验，就盲目的开始了。不过现在回想一下，这个盲目是有非常有意义的，虽然网站没有成功，但通过去做这件事，让我学到了很多很多。</p>
+
+<p>有些人认为这事不靠谱，个人的收入、支出，是自己的隐私，记到网上太不安全了，一定不会有人用的。但事实是经过3个月的推广，每天已有200个活跃用户。</p>
+
+<h1 id="一个不错的开始">一个不错的开始</h1>
+
+<p>刚开始是用业余的时间，用Eclipse创建了一个工程，SVN版本管理，MYSQL数据库，由于之前对Struts,Spring，Hibernate熟悉，所以就选择了J2EE的架构，刚开始就两张表&mdash;用户表和帐单表。其实是个非常不错的开始，因为是从最核心的东西开始的。开始时并不需要设计个非常庞大的东西，然后做一个一年的计划，那样会把自己都吓着，会给自己太多的压力，有个目标就好。经过2个月的努力，第一个版本上线了，并在论坛里邀请了很多朋友帮忙测试，然后改Bug，又经过半个多月努力，加了统计图表，基本像个样子了，自己去买了一台高性能的PC，用的花生壳，买了一个域名，就这样简单的开始了。但怎么让别人知道这个网站呢？（关于网站推广下次专门写一篇文章吧，这次主要分享做产品的经验）</p>
+
+<h1 id="开始迷失了">开始迷失了</h1>
+
+<p>通过一个月的推广，越来越多的用户来了，并提了很多意见和建议。由于没产品经理的经验，从这时就开始迷失了，有人提出界面不美观，正好女友对HTML，CSS很熟，所以对界面做了很大的修改;有人提出没有互动性（SNS那会刚开始热），就做一个记事功能，可以与大家分享记账的故事，心情等。一个可怕的开始，因为要做好友列表，消息，动态，热门记事排行。。。做好了就是一个轻微博嘛;有人提出没地方留言，所以加了一个留言板;那会Google统计做的还没现在这么好，而且时效性很差，所以自己做了一个统计;为了提高用户积极性，增加了积分排名机制。。。</p>
+
+<h1 id="优先级">优先级</h1>
+
+<p>当然不是用户提的都去做，但现在想想，还是没有在简单与功能的权衡上做好。功能是越来越全，但记账的用户体验还是不很满意，并没有把核心的东西做好，结果是用户感觉功能是挺全的，但从使用体验上都差很多。我之前犯的错误就是没有集中精力把核心的东西（记账）做好，不应该做记事，至少还不到做记事的时候，不应该做无关紧要的一些功能。现在想想那会应该做的事应该是把记账的用户体验不断完善，做手机客户端，记账分享等等。</p>
+
+<h1 id="用户最关心的">用户最关心的</h1>
+
+<p>来我网站的用户最主要的需求是能方便、简单、快捷的记账，并能统计分析出想要的数据来，而不会特别在乎是否有留言板功能。通过这件事明白了做为个人或一个小的团队，应该时刻提醒自己，产品的核心是什么，这个产品功能可以非常的简单，但这个功能，才会给用户带来价值。
+实则上，软件不需要去适应所有的情况，有时候，它不能干某些事情才恰恰凸显它的价值。比如微博，不能发超过140个字符的内容，但它给用户带来了价值。</p>
+
+<p>这次主要写了些关于产品设计的心得，当然第一次创业的失败原因不仅仅是这些原因，下次有时间了继续分享给大家，希望对大家有所帮助。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">袁平</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">2011-11-02</span>
+  </p>
+  
+  
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://yuanping.github.io/tags/%E4%BA%92%E8%81%94%E7%BD%91/">互联网</a>
+          <a href="https://yuanping.github.io/tags/%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1/">产品设计</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="https://yuanping.github.io/2011/12/user-experence-share/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">关于用户体验经验分享</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="https://yuanping.github.io/2011/10/free-internet-product-model/">
+            <span class="next-text nav-default">别去比拼功能</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="yp.xjgz@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/1819766/yuan-ping" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/yuanping" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/1879650055/profile" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="https://yuanping.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">袁平</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://yuanping.github.io/dist/even.ece58db6.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
