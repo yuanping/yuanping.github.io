@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>拆分一个子目录到一个新的Git仓库中</title>
+      <link>https://yuanping.github.io/2019/01/splitting-a-subfolder-out-into-a-new-repository/</link>
+      <pubDate>Sat, 12 Jan 2019 16:03:48 +0800</pubDate>
+      
+      <guid>https://yuanping.github.io/2019/01/splitting-a-subfolder-out-into-a-new-repository/</guid>
+      <description>我们在项目开发中，可能会有这样的需求，某一个子目录的文件比较通用，可以独立成为一个工具包，以备其他项目复用。这时想把这个子目录拆分出来，并且</description>
+    </item>
+    
+    <item>
       <title>Shell 脚本简介</title>
       <link>https://yuanping.github.io/2019/01/shell-script-introduction/</link>
       <pubDate>Sat, 05 Jan 2019 16:03:48 +0800</pubDate>

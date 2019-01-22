@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on 袁平的博客</title>
+    <link>https://yuanping.github.io/tags/git/</link>
+    <description>Recent content in Git on 袁平的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 12 Jan 2019 16:03:48 +0800</lastBuildDate>
+    
+	<atom:link href="https://yuanping.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>拆分一个子目录到一个新的Git仓库中</title>
+      <link>https://yuanping.github.io/2019/01/splitting-a-subfolder-out-into-a-new-repository/</link>
+      <pubDate>Sat, 12 Jan 2019 16:03:48 +0800</pubDate>
+      
+      <guid>https://yuanping.github.io/2019/01/splitting-a-subfolder-out-into-a-new-repository/</guid>
+      <description>我们在项目开发中，可能会有这样的需求，某一个子目录的文件比较通用，可以独立成为一个工具包，以备其他项目复用。这时想把这个子目录拆分出来，并且</description>
+    </item>
+    
+  </channel>
+</rss>
