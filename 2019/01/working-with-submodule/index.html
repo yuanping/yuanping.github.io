@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Git submodule 的使用 - 袁平的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="袁平" /><meta name="description" content="我们在工作中，随着项目的发展，可能会遇到一个项目的某些文件可以抽出来作为一个工具包或库，可以被其他项目使用。Git提供了一个工具解决这个问题" /><meta name="keywords" content="袁平, Rails" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://yuanping.github.io/2019/01/working-with-submodule/" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://yuanping.github.io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yuanping.github.io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yuanping.github.io/favicon-16x16.png">
+<link rel="manifest" href="https://yuanping.github.io/manifest.json">
+<link rel="mask-icon" href="https://yuanping.github.io/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="https://yuanping.github.io/dist/even.93844dae.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Git submodule 的使用" />
+<meta property="og:description" content="我们在工作中，随着项目的发展，可能会遇到一个项目的某些文件可以抽出来作为一个工具包或库，可以被其他项目使用。Git提供了一个工具解决这个问题" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yuanping.github.io/2019/01/working-with-submodule/" /><meta property="article:published_time" content="2019-01-20T16:03:48&#43;08:00"/>
+<meta property="article:modified_time" content="2019-01-20T16:03:48&#43;08:00"/>
+
+<meta itemprop="name" content="Git submodule 的使用">
+<meta itemprop="description" content="我们在工作中，随着项目的发展，可能会遇到一个项目的某些文件可以抽出来作为一个工具包或库，可以被其他项目使用。Git提供了一个工具解决这个问题">
+
+
+<meta itemprop="datePublished" content="2019-01-20T16:03:48&#43;08:00" />
+<meta itemprop="dateModified" content="2019-01-20T16:03:48&#43;08:00" />
+<meta itemprop="wordCount" content="1607">
+
+
+
+<meta itemprop="keywords" content="Git,技术分享," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git submodule 的使用"/>
+<meta name="twitter:description" content="我们在工作中，随着项目的发展，可能会遇到一个项目的某些文件可以抽出来作为一个工具包或库，可以被其他项目使用。Git提供了一个工具解决这个问题"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="https://yuanping.github.io/" class="logo">袁平的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="https://yuanping.github.io/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="https://yuanping.github.io/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="https://yuanping.github.io/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="https://yuanping.github.io/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="https://yuanping.github.io/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="https://yuanping.github.io/" class="logo">袁平的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Git submodule 的使用</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 20011&#43;08-20 </span>
+        <div class="post-category">
+            <a href="https://yuanping.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"> 技术分享 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#添加一个submodule">添加一个submodule</a></li>
+<li><a href="#参与一个使用submodule的项目">参与一个使用submodule的项目</a></li>
+<li><a href="#抽出submodule作为独立代码仓库">抽出submodule作为独立代码仓库</a></li>
+<li><a href="#使用submodule的建议">使用submodule的建议</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>我们在工作中，随着项目的发展，可能会遇到一个项目的某些文件可以抽出来作为一个工具包或库，可以被其他项目使用。Git提供了一个工具解决这个问题：<code>submodule</code></p>
+
+<p>Submodule 允许你包含或内嵌一个或多个代码仓库作为一个子目录在你的项目中。不过submodule不一定是最佳的方式，需要根据项目的实际情况来选择，在文章的后面，我会说一些缺点与其他实现方式。</p>
+
+<h1 id="添加一个submodule">添加一个submodule</h1>
+
+<p>假设我们现在开发一个汽车的项目，发现公司其他同事之前研发的轮胎项目比较适合，可以直接使用，没有必要再去造一个新的轮子。</p>
+
+<p><img src="https://magnet-file.qn.cichang.net/yuanping/blog/tesla-car.jpg" alt="Car" /></p>
+
+<p>你可以轮胎项目作为汽车项目的一个子模块，在汽车项目中执行下面命令导入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git submodule add https://github.com/&lt;user&gt;/tire tire</pre></td></tr></table>
+</div>
+</div>
+<p>执行成功后，在你的项目中就会有 <code>tire</code> 这个文件夹，如果你的Git版本比较低，打开 tire 文件夹，会发现里面什么也没有，不用担心，再执行下面的命令就可以了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git submodule update --init --recursive</pre></td></tr></table>
+</div>
+</div>
+<p>当然，如果你是最新版本的Git，Git会自动帮你做这些。</p>
+
+<p>如果顺利，这时你的项目的<code>tire</code>文件夹里已经有了轮胎项目的所有代码了。你可以提交代码，应用这些改变。如果你用的是GitHub或GitLab，你会发现 <code>tire</code> 文件夹的图标样式与普通的文件夹是有一些区别的，当你点击 <code>tire</code> 文件夹，会自动跳转到 <code>tire</code> 的代码仓库（repository）里。</p>
+
+<p>在命令行中，你在不同的文件夹中执行git 命令，也有所不同。比如你在汽车项目的普通目录里执行git log与在 tire 目录中执行，会发现显示的是不同的 repository 的提交历史。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">cd ~/projects/car
+git log # log shows commits from Project Car
+cd ~/projects/car/others
+git log # still commits from Project Car
+cd ~/projects/car/tire
+git log # commits from Tire</pre></td></tr></table>
+</div>
+</div>
+<h1 id="参与一个使用submodule的项目">参与一个使用submodule的项目</h1>
+
+<p>当有一个新的员工参与Car项目的开发时，使用 git clone 去下载Car项目代码，你会发现项目里 tire 目录中什么也没有。</p>
+
+<p>原因是，Git希望我们显式的去指定是否下载submodule目录中的内容。在这里，你可以使用 <code>git submodule update --init --recursive</code> 来解决，但是还有一个更简单的命令，在 <code>clone</code> 时，指定一个参数，就可以自动下载 submodule 目录中的所有内容。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git clone --recursive &lt;project url&gt;</pre></td></tr></table>
+</div>
+</div>
+<h1 id="抽出submodule作为独立代码仓库">抽出submodule作为独立代码仓库</h1>
+
+<p>如果你开发一段时间Car项目之后，发现发动机这块代码可能会被其他项目使用，所有想单独创建一个Engine代码仓库，但是想把之前的提交历史也保留，这时就需要用到 <code>git filter-branch</code> 来实现。关于 <code>filter-branch</code> 的具体使用，可以看这篇<a href="https://yuanping.github.io/2019/01/splitting-a-subfolder-out-into-a-new-repository/">文章</a>。</p>
+
+<p>第一步，先创建一个 car 项目的拷贝，用来生成 engine 项目。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">cd ..
+cp -r car engine</pre></td></tr></table>
+</div>
+</div>
+<p>我们使用 <code>cp</code> 带 <code>-r</code> 参数，表示拷贝car目录里所有的文件包括文件夹中的文件到 engine 中。</p>
+
+<p>然后进入engine项目，抽出engine目录的内容。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">cd engine
+git filter-branch --prune-empty --subdirectory-filter engine master</pre></td></tr></table>
+</div>
+</div>
+<p>这时，engine目录里只有发动机相关的代码了，我们在GitHub上创建好新的代码仓库，然后设置为新的 repository url。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git remote set-url origin https://github.com/&lt;user&gt;/engine</pre></td></tr></table>
+</div>
+</div>
+<p>最后，把代码推到GitHub上就OK了。</p>
+
+<p>现在我们再切换到car项目里，把engine目录换成submodule。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">cd ../car
+git rm -r engine
+git commit -m &#34;Remove engine (preparing for submodule)&#34;</pre></td></tr></table>
+</div>
+</div>
+<p>最后，在用之前我们讲的命令，把engine作为submodule添加进来。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git submodule add https://github.com/&lt;user&gt;/engine engine
+git commit -m &#34;engine submodule&#34;</pre></td></tr></table>
+</div>
+</div>
+<h1 id="使用submodule的建议">使用submodule的建议</h1>
+
+<ul>
+<li>在使用submodule把一个repository添加到项目时，需要考虑一下是不是最好的方式，submodule适合一些简单的场景，复杂的场景需要专门的包依赖管理工具。现在每个语言基本都有自己的包管理工具了，可以处理复杂的依赖管理。比如<code>Ruby</code>有 <code>rubygems</code>, <code>Node.js</code> 有 <code>npm</code>。</li>
+<li>Git默认不会下载submodule的代码，所以当项目中使用了submodule时，你需要告诉项目伙伴，使用 <code>git clone --recursive</code> 命令下载所有的 submodule代码。</li>
+<li>注意，项目成员不会自动更新submodule里的代码，当你更新了submodule，你需要提醒项目成员使用 git submodule update 来更新，否则会有很多奇怪的现象。</li>
+<li>需要自己权衡，便利性与代码一致性。简单的情况，比如给 hugo 安装一个新的模板样式，用submodule就非常方便。如果在项目中，希望项目成员使用的submodule代码都一致，需要指定SHA去锁定版本。</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">袁平</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">20011&#43;08-20</span>
+  </p>
+  
+  
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://yuanping.github.io/tags/git/">Git</a>
+          <a href="https://yuanping.github.io/tags/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="https://yuanping.github.io/2019/01/splitting-a-subfolder-out-into-a-new-repository/">
+            <span class="next-text nav-default">拆分一个子目录到一个新的Git仓库中</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="yp.xjgz@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/1819766/yuan-ping" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/yuanping" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/1879650055/profile" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="https://yuanping.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">袁平</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://yuanping.github.io/dist/even.ece58db6.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

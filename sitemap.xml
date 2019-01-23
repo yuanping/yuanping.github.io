@@ -10,6 +10,13 @@
   </url>
   
   <url>
+    <loc>https://yuanping.github.io/2019/01/working-with-submodule/</loc>
+    <lastmod>2019-01-20T16:03:48+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://yuanping.github.io/2019/01/splitting-a-subfolder-out-into-a-new-repository/</loc>
     <lastmod>2019-01-12T16:03:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -163,7 +170,7 @@
   
   <url>
     <loc>https://yuanping.github.io/tags/git/</loc>
-    <lastmod>2019-01-12T16:03:48+08:00</lastmod>
+    <lastmod>2019-01-20T16:03:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -177,7 +184,7 @@
   
   <url>
     <loc>https://yuanping.github.io/post/</loc>
-    <lastmod>2019-01-12T16:03:48+08:00</lastmod>
+    <lastmod>2019-01-20T16:03:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -268,14 +275,14 @@
   
   <url>
     <loc>https://yuanping.github.io/tags/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/</loc>
-    <lastmod>2019-01-12T16:03:48+08:00</lastmod>
+    <lastmod>2019-01-20T16:03:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://yuanping.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/</loc>
-    <lastmod>2019-01-12T16:03:48+08:00</lastmod>
+    <lastmod>2019-01-20T16:03:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>

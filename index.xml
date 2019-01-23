@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Git submodule 的使用</title>
+      <link>https://yuanping.github.io/2019/01/working-with-submodule/</link>
+      <pubDate>Sun, 20 Jan 2019 16:03:48 +0800</pubDate>
+      
+      <guid>https://yuanping.github.io/2019/01/working-with-submodule/</guid>
+      <description>我们在工作中，随着项目的发展，可能会遇到一个项目的某些文件可以抽出来作为一个工具包或库，可以被其他项目使用。Git提供了一个工具解决这个问题</description>
+    </item>
+    
+    <item>
       <title>拆分一个子目录到一个新的Git仓库中</title>
       <link>https://yuanping.github.io/2019/01/splitting-a-subfolder-out-into-a-new-repository/</link>
       <pubDate>Sat, 12 Jan 2019 16:03:48 +0800</pubDate>
