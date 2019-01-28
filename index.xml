@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>GraphQL简介</title>
+      <link>https://yuanping.github.io/2019/01/graphql-introduction/</link>
+      <pubDate>Sat, 26 Jan 2019 16:00:00 +0800</pubDate>
+      
+      <guid>https://yuanping.github.io/2019/01/graphql-introduction/</guid>
+      <description>API的问题 随着前/后端的分离，前端与后端关于API的争吵也越来越多。前端希望一次请求可以取到页面上所有的数据，后端坚持REST原则，每个接</description>
+    </item>
+    
+    <item>
       <title>Git submodule 的使用</title>
       <link>https://yuanping.github.io/2019/01/working-with-submodule/</link>
       <pubDate>Sun, 20 Jan 2019 16:03:48 +0800</pubDate>
