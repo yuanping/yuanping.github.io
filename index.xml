@@ -6,7 +6,7 @@
     <description>Recent content on 袁平的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 20 Aug 2017 21:38:52 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 13 Jul 2019 16:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://yuanping.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -21,11 +21,20 @@
     </item>
     
     <item>
-      <title>Git Merge VS Rebase</title>
-      <link>https://yuanping.github.io/2019/04/git-rebase-vs-merge/</link>
-      <pubDate>Tue, 02 Apr 2019 16:00:00 +0800</pubDate>
+      <title>Kubernetes访问某个pod的总结</title>
+      <link>https://yuanping.github.io/2019/07/k8s-kubectl-exec-pod-tip/</link>
+      <pubDate>Sat, 13 Jul 2019 16:00:00 +0800</pubDate>
       
-      <guid>https://yuanping.github.io/2019/04/git-rebase-vs-merge/</guid>
+      <guid>https://yuanping.github.io/2019/07/k8s-kubectl-exec-pod-tip/</guid>
+      <description>场景 当应用部署在Kuternetes集群时，有时我们需要某个pod中执行一些命令或查看一些内容，比如需要通过Rails的console查看些</description>
+    </item>
+    
+    <item>
+      <title>Git Merge VS Rebase</title>
+      <link>https://yuanping.github.io/2019/05/git-merge-vs-rebase/</link>
+      <pubDate>Fri, 17 May 2019 16:00:00 +0800</pubDate>
+      
+      <guid>https://yuanping.github.io/2019/05/git-merge-vs-rebase/</guid>
       <description>Git rebase命令因为会修改提交历史，所以一般推荐新手不要随意使用，但是如果理解它，谨慎的去使用，会给你在开发过程中带来很多方便。这篇文章，</description>
     </item>
     
@@ -234,10 +243,10 @@
     
     <item>
       <title>关于我</title>
-      <link>https://yuanping.github.io/2011/04/about-yuanping/</link>
-      <pubDate>Fri, 01 Apr 2011 16:00:00 +0800</pubDate>
+      <link>https://yuanping.github.io/2011/01/about-yuanping/</link>
+      <pubDate>Tue, 25 Jan 2011 16:03:48 +0800</pubDate>
       
-      <guid>https://yuanping.github.io/2011/04/about-yuanping/</guid>
+      <guid>https://yuanping.github.io/2011/01/about-yuanping/</guid>
       <description>前 WorkXP 联合创始人 现任 一土教育 - 磁场 CTO 一个喜欢旅行、摄影、骑行、徒步的软件工程师，当然也喜欢编程，什么？编程也是兴趣爱好？是呀，要不是喜欢，怎么</description>
     </item>
     

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Kubernetes访问某个pod的总结 - 袁平的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="袁平" /><meta name="description" content="场景 当应用部署在Kuternetes集群时，有时我们需要某个pod中执行一些命令或查看一些内容，比如需要通过Rails的console查看些" /><meta name="keywords" content="袁平, Rails" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://yuanping.github.io/2019/07/k8s-kubectl-exec-pod-tip/" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://yuanping.github.io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yuanping.github.io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yuanping.github.io/favicon-16x16.png">
+<link rel="manifest" href="https://yuanping.github.io/manifest.json">
+<link rel="mask-icon" href="https://yuanping.github.io/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="https://yuanping.github.io/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Kubernetes访问某个pod的总结" />
+<meta property="og:description" content="场景 当应用部署在Kuternetes集群时，有时我们需要某个pod中执行一些命令或查看一些内容，比如需要通过Rails的console查看些" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yuanping.github.io/2019/07/k8s-kubectl-exec-pod-tip/" />
+<meta property="article:published_time" content="2019-07-13T16:00:00&#43;08:00"/>
+<meta property="article:modified_time" content="2019-07-13T16:00:00&#43;08:00"/>
+
+<meta itemprop="name" content="Kubernetes访问某个pod的总结">
+<meta itemprop="description" content="场景 当应用部署在Kuternetes集群时，有时我们需要某个pod中执行一些命令或查看一些内容，比如需要通过Rails的console查看些">
+
+
+<meta itemprop="datePublished" content="2019-07-13T16:00:00&#43;08:00" />
+<meta itemprop="dateModified" content="2019-07-13T16:00:00&#43;08:00" />
+<meta itemprop="wordCount" content="1448">
+
+
+
+<meta itemprop="keywords" content="Kubernetes,Shell,技术分享," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Kubernetes访问某个pod的总结"/>
+<meta name="twitter:description" content="场景 当应用部署在Kuternetes集群时，有时我们需要某个pod中执行一些命令或查看一些内容，比如需要通过Rails的console查看些"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="https://yuanping.github.io/" class="logo">袁平的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="https://yuanping.github.io/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="https://yuanping.github.io/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="https://yuanping.github.io/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="https://yuanping.github.io/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="https://yuanping.github.io/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="https://yuanping.github.io/" class="logo">袁平的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://yuanping.github.io/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Kubernetes访问某个pod的总结</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-07-13 </span>
+        <div class="post-category">
+            <a href="https://yuanping.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"> 技术分享 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#kubernetes-的命令优化">kubernetes 的命令优化</a>
+<ul>
+<li><a href="#kubectl-get-pods-优化">kubectl get pods 优化</a></li>
+<li><a href="#执行一条命令进入pod">执行一条命令进入pod</a></li>
+<li><a href="#进入pod并执行某个操作">进入pod并执行某个操作</a></li>
+</ul></li>
+<li><a href="#自定义shell命令">自定义Shell命令</a>
+<ul>
+<li><a href="#找个地方存放我们的命令">找个地方存放我们的命令</a></li>
+<li><a href="#修改文件的执行权限">修改文件的执行权限</a></li>
+<li><a href="#让我们的命令在terminal中可用">让我们的命令在Terminal中可用</a></li>
+<li><a href="#给命令加个别名">给命令加个别名</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h1 id="场景">场景</h1>
+
+<p>当应用部署在Kuternetes集群时，有时我们需要某个pod中执行一些命令或查看一些内容，比如需要通过Rails的console查看些数据。</p>
+
+<p>操作步骤可分三步：</p>
+
+<ol>
+<li><code>kubectl get pods -n magnet</code> # 首先列出某个命名空间里目前运行中的所以pods</li>
+<li><code>kubectl exec -it pod_name -- bash</code> # 找到想访问的pod，复制pod的名称，进入pod的命令行</li>
+<li><code>rails console</code> # 在pod中，进入rails的console</li>
+</ol>
+
+<p>如果经常有这个需求，那么每次都要这样做就比较麻烦了，有简单的办法吗？可以执行一条命令就可以吗？我们来一步一步的优化！</p>
+
+<h1 id="kubernetes-的命令优化">kubernetes 的命令优化</h1>
+
+<h2 id="kubectl-get-pods-优化">kubectl get pods 优化</h2>
+
+<p><code>kubectl get pods -n magnet</code> 会返回magnet命名空间下的所有pods，如果部署的服务比较多，并且每个实例都有多个的话，往往会是一个很长的列表。</p>
+
+<p>我们可以通过标签，对服务进行分组、分类，这样就可以通过标签来进行过滤筛选，只列出我们需要的内容。关于k8s的标签更多的操作，可以看官方的<a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/">文档</a>。</p>
+
+<p><code>kubectl get pods -n magnet -l role=web,name=web-api</code> 这样就筛选出来标签是 <code>role=web</code> 并且 <code>name=web-api</code> 的pods。
+输出的结果类似下面这样：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">NAME                   READY   STATUS    RESTARTS   AGE
+magnet-web-api-c4qjw   1/1     Running   0          22h
+magnet-web-api-n8jk8   1/1     Running   0          22h
+magnet-web-api-sbbdh   1/1     Running   0          22h</pre></td></tr></table>
+</div>
+</div>
+<p>如果想把第一步与第二步的命令合成一个，就需要把一个命令的输出结果，放入第二个命令的 <code>pod_name</code> 变量里。我们只想要前面的名字，查资料后，可以通过 <code>-o name</code> 参数，支取pod的名称。 执行 <code>kubectl get pods -n magnet -l role=web,name=web-api -o name</code> ，输出结果类似下面：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">magnet-web-api-c4qjw
+magnet-web-api-n8jk8
+magnet-web-api-sbbdh</pre></td></tr></table>
+</div>
+</div>
+<p>但是我们只是想要刚才的输出结果的第一行的最开始部分，即(<code>magnet-web-api-c4qjw</code>)。我们可以通过加格式输出参数得到：
+<code>kubectl get pods -n magnet -l role=web,name=web-api -o jsonpath='{.items[0].metadata.name}'</code>
+输出结果类似下面：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">magnet-web-api-c4qjw</pre></td></tr></table>
+</div>
+</div>
+<p>OK，我们现在已经得到了<code>pod_name</code>了，现在只需把它传递到第二步的命令里就可以了。</p>
+
+<h2 id="执行一条命令进入pod">执行一条命令进入pod</h2>
+
+<p>我们只需把第二步命令<code>kubectl exec -it pod_name -- bash</code> 的 <code>pod_name</code> 换成
+<code>kubectl exec -it $(kubectl get pods -n magnet -l role=web,name=web-api -o jsonpath='{.items[0].metadata.name}' ) -- bash</code></p>
+
+<p>这样就可以通过一条命令，进入指定服务实例的第一个pod了。</p>
+
+<h2 id="进入pod并执行某个操作">进入pod并执行某个操作</h2>
+
+<p>因为进入到指定pod的目的是要进入 Rails console，那么我们可以通过追加 <code>-c &quot;rails c&quot;</code> 来实现。把第三步的命令合并成一条，这样就可以直接达到目标：</p>
+
+<p><code>kubectl exec -it $(kubectl get pods -n magnet -l role=web,name=web-api -o jsonpath='{.items[0].metadata.name}' ) -- bash -c &quot;rails c&quot;</code></p>
+
+<p>但是，每次都把输入这么长的命令那太麻烦了，我们定义一个自定义的shell命令吧。</p>
+
+<h1 id="自定义shell命令">自定义Shell命令</h1>
+
+<h2 id="找个地方存放我们的命令">找个地方存放我们的命令</h2>
+
+<p>我们在home目录创建一个隐藏文件，用来存放命令。使用<code>.</code>开头的文件名，只有通过终端才可以访问，这样也可避免误删除。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">cd ~
+touch .custom_command.sh</pre></td></tr></table>
+</div>
+</div>
+<p>使用你最喜欢的编辑器，打开它，录入下面的代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"><span class="cp">#!/bin/bash
+</span><span class="cp"></span><span class="k">function</span> staging_console<span class="o">()</span> <span class="o">{</span>
+    kubectl <span class="nb">exec</span> -it <span class="k">$(</span>kubectl get pods -n magnet -l <span class="nv">role</span><span class="o">=</span>web,name<span class="o">=</span>web-api -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[0].metadata.name}&#39;</span> <span class="k">)</span> -- bash -c <span class="s2">&#34;rails c
+</span><span class="s2">}</span></pre></td></tr></table>
+</div>
+</div>
+<h2 id="修改文件的执行权限">修改文件的执行权限</h2>
+
+<p>默认创建的新文件只有只读权限，我们加上执行权限：
+<code>chmod +x .custom_command.sh</code></p>
+
+<h2 id="让我们的命令在terminal中可用">让我们的命令在Terminal中可用</h2>
+
+<p>通过这个命令，可以让我们刚定义的命令立即可用 <code>source ~/.my_custom_commands.sh</code>。但是当你下次打开新的Terminal时，又不可用了，还需要再执行一次。
+为了让每次打开Terminal都可用，我们需要把刚才的命令添加到Shell的启动文件中。</p>
+
+<p>Bash是UNIX系统默认的Shell，我个人更喜欢ZSH，那么使用编辑器打开 <code>~/.zshrc</code> 文件，把这个命令加到最后一行或者你喜欢的地方 <code>source ~/.my_custom_commands.sh</code>。</p>
+
+<p>好的，现在在Terminal中输入 <code>staging_console</code>，就会发现直接打开了指定pod的Rails console。</p>
+
+<h2 id="给命令加个别名">给命令加个别名</h2>
+
+<p>如果觉得每次输入 <code>staging_console</code> 还是麻烦，那么可以通过别名的方式简化</p>
+
+<p><code>alias sc=staging_console</code></p>
+
+<p>现在在Terminal中输入 <code>sc</code>，就可以了。</p>
+
+<p>想了解关于自定义命令更详细的说明与步骤，可以看这篇<a href="https://medium.com/devnetwork/how-to-create-your-own-custom-terminal-commands-c5008782a78e">文章</a>，写的非常的棒。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">袁平</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-07-13
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://yuanping.github.io/tags/kubernetes/">Kubernetes</a>
+          <a href="https://yuanping.github.io/tags/shell/">Shell</a>
+          <a href="https://yuanping.github.io/tags/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="https://yuanping.github.io/2019/05/git-merge-vs-rebase/">
+            <span class="next-text nav-default">Git Merge VS Rebase</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="yp.xjgz@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/1819766/yuan-ping" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/yuanping" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/1879650055/profile" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="https://yuanping.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">袁平</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://yuanping.github.io/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

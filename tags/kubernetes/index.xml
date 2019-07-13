@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kubernetes on 袁平的博客</title>
+    <link>https://yuanping.github.io/tags/kubernetes/</link>
+    <description>Recent content in Kubernetes on 袁平的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 13 Jul 2019 16:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://yuanping.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Kubernetes访问某个pod的总结</title>
+      <link>https://yuanping.github.io/2019/07/k8s-kubectl-exec-pod-tip/</link>
+      <pubDate>Sat, 13 Jul 2019 16:00:00 +0800</pubDate>
+      
+      <guid>https://yuanping.github.io/2019/07/k8s-kubectl-exec-pod-tip/</guid>
+      <description>场景 当应用部署在Kuternetes集群时，有时我们需要某个pod中执行一些命令或查看一些内容，比如需要通过Rails的console查看些</description>
+    </item>
+    
+  </channel>
+</rss>
